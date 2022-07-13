@@ -1,0 +1,67 @@
+<template>
+    <lightning-card title="Statistics">
+        <div class="slds-form-element">
+            <div style="padding:5px" class="slds-form-element__control">
+                <lightning-input type="text" label="Enter Name of Account" onchange={accountNameHandler}>
+                </lightning-input>
+            </div>
+        </div>
+        <div if:false={dataSearch}>
+            <lightning-accordion>
+                <template if:true={showingAccounts}>
+                    <template for:each={showingAccounts} for:item="acc">
+                        <lightning-accordion-section key={acc.Id} label={acc.Name}>
+                            <div style="font-size:14px; font-style:oblique;">
+                                Opportunities:
+                            </div>
+                            <template for:each={acc.Opportunities} for:item="opp">
+                                <div key={opp.AccountId}>
+                                    <p onclick={viewRecord} data-id={opp.Id}>Name: <b>{opp.Name}</b><i> (click) </i></p>
+                                    <p>Created Date: <lightning-formatted-date-time value={opp.CreatedDate}>
+                                        </lightning-formatted-date-time>
+                                    </p>
+                                    <p>Close Date: <lightning-formatted-date-time value={opp.CloseDate}>
+                                        </lightning-formatted-date-time>
+                                    </p>
+                                    <p>Amount: {opp.Amount}$</p>
+                                    <c-modal item={opp.Id}></c-modal>
+                                    <br>
+                                </div>
+                            </template>
+                        </lightning-accordion-section>
+                    </template>
+                </template>
+            </lightning-accordion>
+            <div slot="footer" class="slds-var-m-vertical_medium">
+                <c-pagination records={totalAccounts} record-size="10" onupdate={updateAccountHandler}></c-pagination>
+            </div>
+        </div>
+        <div if:true={dataSearch}>
+            <lightning-accordion>
+                <template if:true={showingAccounts}>
+                    <template for:each={showingAccounts} for:item="acc">
+                        <lightning-accordion-section key={acc.Id} label={acc.Name}>
+                            <template for:each={acc.Opportunities} for:item="opp">
+                                <div key={opp.AccountId}>
+                                    <p onclick={viewRecord} data-id={opp.Id}>Name: <b>{opp.Name}</b></p>
+                                    <p>Created Date: <lightning-formatted-date-time value={opp.CreatedDate}>
+                                        </lightning-formatted-date-time>
+                                    </p>
+                                    <p>Close Date: <lightning-formatted-date-time value={opp.CloseDate}>
+                                        </lightning-formatted-date-time>
+                                    </p>
+                                    <p>Amount: {opp.Amount}$</p>
+                                    <c-modal item={opp.Id}></c-modal>
+                                    <br>
+                                </div>
+                            </template>
+                        </lightning-accordion-section>
+                    </template>
+                </template>
+            </lightning-accordion>
+            <div slot="footer" class="slds-var-m-vertical_medium">
+                <c-pagination records={dataSearch} record-size="10" onupdate={updateAccountHandler}></c-pagination>
+            </div>
+        </div>
+    </lightning-card>
+</template>

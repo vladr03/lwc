@@ -1,0 +1,28 @@
+<template>
+    <lightning-button variant="brand-outline" label="Products" onclick={openModal}>
+    </lightning-button>
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__content slds-var-p-around_medium slds-scrollable_y">
+                    <lightning-card>
+                        <div style="font-size:16px;" class="slds-align_absolute-center">Opportunity Products</div>
+                        <template for:each={oppProdList} for:item="opp">
+                            <div key={opp.Product2.Id} style>
+                                <p>Name: <b>{opp.Product2.Name}</b></p>
+                                <p>Quantity: {opp.Quantity}</p>
+                                <p>Price: {opp.TotalPrice}$</p>
+                                <br>
+                            </div>
+                        </template>
+                    </lightning-card>
+                    <button type="button" class="slds-align_absolute-center slds-button slds-button--brand" onclick={closeModal}>
+                        Close
+                    </button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

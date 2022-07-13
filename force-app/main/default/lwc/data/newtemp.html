@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Opportunities">
+        <template if:true={recs}>
+            <template for:each={recs} for:item="opportunity">
+                <div style="padding-left:20px;" key={opportunity.Id}>
+                    <p>Name: <b><i>{opportunity.Name}</i></b></p>
+                    <p>Created Date: <lightning-formatted-date-time value={opportunity.CreatedDate}>
+                        </lightning-formatted-date-time>
+                    </p>
+                    <p>Close Date: <lightning-formatted-date-time value={opportunity.CloseDate}>
+                        </lightning-formatted-date-time>
+                    </p>
+                    <p>Amount: {opportunity.Amount}$</p>
+                    <c-modal item={opportunity.Id}></c-modal>
+                    <br>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

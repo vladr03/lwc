@@ -1,0 +1,23 @@
+<template>
+    <lightning-layout>
+        <div style="display:flex; align-items:columns;">
+            <div style="margin-left:10px;">
+                <lightning-layout-item>
+                    <lightning-button label="Previous Page" icon-name="utility:chevronleft" onclick={previousHandler}
+                        disabled={disablePrevious}></lightning-button>
+                </lightning-layout-item>
+            </div>
+            <div style="margin-left:10px;">
+                <lightning-layout-item>
+                    <lightning-button label="Next Page" icon-name="utility:chevronright" icon-position="right"
+                        onclick={nextHandler} disabled={disableNext}></lightning-button>
+                </lightning-layout-item>
+            </div>
+        </div>
+        <div style="font-size:14px; margin-left:5px; padding:5px;">
+            <lightning-layout-item flexibility="grow">
+                <p class="slds-text-align_center">{currentPage} of {totalPage} Page</p>
+            </lightning-layout-item>
+        </div>
+    </lightning-layout>
+</template>
