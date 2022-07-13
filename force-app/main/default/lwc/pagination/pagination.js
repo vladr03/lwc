@@ -4,7 +4,7 @@ export default class Pagination extends LightningElement {
     currentPage = 1
     totalRecords
     @api recordSize = 10
-    totalPage = 0
+    totalPage = 1
     get records() {
         return this.visibleRecords
     }
@@ -13,7 +13,7 @@ export default class Pagination extends LightningElement {
         if (data) {
             this.totalRecords = data
             this.recordSize = Number(this.recordSize)
-            this.totalPage = Math.ceil(data.length / this.recordSize)
+            this.totalPage = Math.ceil(data.length / this.recordSize) || 1;
             this.updateRecords()
         }
     }

@@ -1,6 +1,5 @@
 import { LightningElement, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
-import { getSObjectValue } from '@salesforce/apex';
 import getAccountList from '@salesforce/apex/getDataForTheThirdStep.getAccountList';
 import getAccount from '@salesforce/apex/getDataForTheThirdStep.getAccount';
 import firstTemp from './data.html';
@@ -42,6 +41,8 @@ export default class Data extends NavigationMixin(LightningElement) {
         console.log('search', this.searchAccountName)
         if (!this.searchAccountName) {
             this.dataSearch = undefined;
+            this.showingAccounts = this.totalAccounts;
+            return;
         }
         findAccounts({ accName: this.searchAccountName })
             .then(result => {
