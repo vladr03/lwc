@@ -1,8 +1,8 @@
 <template>
-    <lightning-card title="Statistics">
+    <lightning-card title="Accounts with Closed Won Opportunities">
         <div class="slds-form-element">
-            <div style="padding:5px" class="slds-form-element__control">
-                <lightning-input type="text" label="Enter Name of Account" onchange={accountNameHandler}>
+            <div style="padding:5px; font-size:16px;" class="slds-form-element__control">
+                <lightning-input type="text" placeholder="Enter Name of Account" onchange={accountNameHandler}>
                 </lightning-input>
             </div>
         </div>
@@ -10,24 +10,70 @@
             <lightning-accordion allow-multiple-sections-open>
                 <template if:true={showingAccounts}>
                     <template for:each={showingAccounts} for:item="acc">
-                        <lightning-accordion-section key={acc.Id} label={acc.Name}>
-                            <div style="font-size:14px; font-style:oblique;">
-                                Closed Opportunities:
-                            </div>
-                            <template for:each={acc.Opportunities} for:item="opp">
-                                <div key={opp.AccountId}>
-                                    <p onclick={viewRecord} data-id={opp.Id}>Name: <b>{opp.Name}</b><i> (click) </i></p>
-                                    <p>Created Date: <lightning-formatted-date-time value={opp.CreatedDate}>
-                                        </lightning-formatted-date-time>
-                                    </p>
-                                    <p>Close Date: <lightning-formatted-date-time value={opp.CloseDate}>
-                                        </lightning-formatted-date-time>
-                                    </p>
-                                    <p>Amount: {opp.Amount}$</p>
-                                    <c-modal item={opp.Id}></c-modal>
-                                    <br>
-                                </div>
-                            </template>
+                        <lightning-accordion-section key={acc.Id} label={acc.Name_Amount__c}>
+                            <lightning-card title="Closed Opportunities">
+                                <table
+                                    class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                                    <thead>
+                                        <tr class="slds-line-height_reset slds-text-title_caps">
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate">
+                                                    Opportunity Name
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate">
+                                                    Created Date
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate">
+                                                    Close Date
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate">
+                                                    Amount
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate">
+                                                    Products
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={acc.Opportunities} for:item="opp">
+                                            <tr key={opp.AccountId}>
+                                                <th scope="row">
+                                                    <div onclick={viewRecord} data-id={opp.Id} class="slds-truncate">
+                                                        <b>{opp.Name}</b> (click)
+                                                    </div>
+                                                </th>
+                                                <th scope="row">
+                                                    <div class="slds-truncate">
+                                                        <lightning-formatted-date-time value={opp.CreatedDate}>
+                                                        </lightning-formatted-date-time>
+                                                    </div>
+                                                </th>
+                                                <th scope="row">
+                                                    <div class="slds-truncate">
+                                                        <lightning-formatted-date-time value={opp.CloseDate}>
+                                                        </lightning-formatted-date-time>
+                                                    </div>
+                                                </th>
+                                                <th scope="row">
+                                                    <div class="slds-truncate">{opp.Amount}$</div>
+                                                </th>
+                                                <th scope="row">
+                                                    <c-modal item={opp.Id}></c-modal>
+                                                </th>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </lightning-card>
                         </lightning-accordion-section>
                     </template>
                 </template>
@@ -40,24 +86,71 @@
             <lightning-accordion allow-multiple-sections-open>
                 <template if:true={showingAccounts}>
                     <template for:each={showingAccounts} for:item="acc">
-                        <lightning-accordion-section key={acc.Id} label={acc.Name}>
-                            <div style="font-size:14px; font-style:oblique;">
-                                Closed Opportunities:
-                            </div>
-                            <template for:each={acc.Opportunities} for:item="opp">
-                                <div key={opp.AccountId}>
-                                    <p onclick={viewRecord} data-id={opp.Id}>Name: <b>{opp.Name}</b></p>
-                                    <p>Created Date: <lightning-formatted-date-time value={opp.CreatedDate}>
-                                        </lightning-formatted-date-time>
-                                    </p>
-                                    <p>Close Date: <lightning-formatted-date-time value={opp.CloseDate}>
-                                        </lightning-formatted-date-time>
-                                    </p>
-                                    <p>Amount: {opp.Amount}$</p>
-                                    <c-modal item={opp.Id}></c-modal>
-                                    <br>
-                                </div>
-                            </template>
+                        <lightning-accordion-section key={acc.Id} label={acc.Name_Amount__c}>
+                            <lightning-card title="Closed Opportunities">
+                                <table
+                                    class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                                    <thead>
+                                        <tr class="slds-line-height_reset slds-text-title_caps">
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate">
+                                                    Opportunity Name
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate">
+                                                    Created Date
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate">
+                                                    Close Date
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate">
+                                                    Amount
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate">
+                                                    Products
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={acc.Opportunities} for:item="opp">
+                                            <tr key={opp.AccountId}>
+                                                <th scope="row">
+                                                    <div onclick={viewRecord} data-id={opp.Id} class="slds-truncate">
+                                                        <b>{opp.Name}</b> (click)
+                                                    </div>
+                                                </th>
+                                                <th scope="row">
+                                                    <div class="slds-truncate">
+                                                        <lightning-formatted-date-time value={opp.CreatedDate}>
+                                                        </lightning-formatted-date-time>
+                                                    </div>
+                                                </th>
+                                                <th scope="row">
+                                                    <div class="slds-truncate">
+                                                        <lightning-formatted-date-time value={opp.CloseDate}>
+                                                        </lightning-formatted-date-time>
+                                                    </div>
+                                                </th>
+                                                <th scope="row">
+                                                    <div class="slds-truncate">{opp.Amount}$</div>
+                                                </th>
+                                                <th scope="row">
+                                                    <c-modal item={opp.Id}></c-modal>
+                                                </th>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+
+                            </lightning-card>
                         </lightning-accordion-section>
                     </template>
                 </template>

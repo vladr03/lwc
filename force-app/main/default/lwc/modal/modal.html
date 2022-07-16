@@ -8,16 +8,51 @@
                 <div class="slds-modal__content slds-var-p-around_medium slds-scrollable_y">
                     <lightning-card>
                         <div style="font-size:16px;" class="slds-align_absolute-center">Opportunity Products</div>
-                        <template for:each={oppProdList} for:item="opp">
-                            <div key={opp.Product2.Id} style>
-                                <p>Name: <b>{opp.Product2.Name}</b></p>
-                                <p>Quantity: {opp.Quantity}</p>
-                                <p>Price: {opp.TotalPrice}$</p>
-                                <br>
-                            </div>
-                        </template>
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                            <thead>
+                                <tr class="slds-line-height_reset slds-text-title_caps">
+                                    <th class="slds-is-resizable" scope="col">
+                                        <div class="slds-truncate">
+                                            Name
+                                        </div>
+                                    </th>
+                                    <th class="slds-is-resizable" scope="col">
+                                        <div class="slds-truncate">
+                                            Quantity
+                                        </div>
+                                    </th>
+                                    <th class="slds-is-resizable" scope="col">
+                                        <div class="slds-truncate">
+                                            Price
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={oppProdList} for:item="opp">
+                                    <tr key={opp.Product2.Id}>
+                                        <th scope="row">
+                                            <div class="slds-truncate">
+                                                <b>{opp.Product2.Name}</b>
+                                            </div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate">
+                                                {opp.Quantity}
+                                            </div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate">
+                                                {opp.TotalPrice}$
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
                     </lightning-card>
-                    <button type="button" class="slds-align_absolute-center slds-button slds-button--brand" onclick={closeModal}>
+                    <button type="button" class="slds-align_absolute-center slds-button slds-button--brand"
+                        onclick={closeModal}>
                         Close
                     </button>
                 </div>
