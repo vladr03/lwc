@@ -3,7 +3,7 @@
         <template if:true={recs}>
             <template for:each={recs} for:item="opportunity">
                 <div style="padding-left:20px;" key={opportunity.Id}>
-                    <p>Name: <b><i>{opportunity.Name}</i></b></p>
+                    <div onclick={viewRecord} data-id={opportunity.Id}>Name: <b><i>{opportunity.Name}</i></b> (click)</div>
                     <p>Created Date: <lightning-formatted-date-time value={opportunity.CreatedDate}>
                         </lightning-formatted-date-time>
                     </p>
