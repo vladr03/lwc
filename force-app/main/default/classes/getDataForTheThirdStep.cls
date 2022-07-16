@@ -11,7 +11,7 @@ public with sharing class getDataForTheThirdStep {
 
     @AuraEnabled(cacheable = true)
     public static List<OpportunityLineItem> getOppProd(String oppId) {
-        List<OpportunityLineItem> oppProdList = [SELECT Product2.Name, Quantity, TotalPrice, Id FROM OpportunityLineItem WHERE OpportunityId = :oppId];
+        List<OpportunityLineItem> oppProdList = [SELECT Id, Product2.Name, Quantity, TotalPrice FROM OpportunityLineItem WHERE OpportunityId = :oppId];
         return oppProdList;
     }
 }
