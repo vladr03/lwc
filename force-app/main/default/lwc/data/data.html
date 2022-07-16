@@ -7,12 +7,12 @@
             </div>
         </div>
         <div if:false={dataSearch}>
-            <lightning-accordion>
+            <lightning-accordion allow-multiple-sections-open>
                 <template if:true={showingAccounts}>
                     <template for:each={showingAccounts} for:item="acc">
                         <lightning-accordion-section key={acc.Id} label={acc.Name}>
                             <div style="font-size:14px; font-style:oblique;">
-                                Opportunities:
+                                Closed Opportunities:
                             </div>
                             <template for:each={acc.Opportunities} for:item="opp">
                                 <div key={opp.AccountId}>
@@ -37,10 +37,13 @@
             </div>
         </div>
         <div if:true={dataSearch}>
-            <lightning-accordion>
+            <lightning-accordion allow-multiple-sections-open>
                 <template if:true={showingAccounts}>
                     <template for:each={showingAccounts} for:item="acc">
                         <lightning-accordion-section key={acc.Id} label={acc.Name}>
+                            <div style="font-size:14px; font-style:oblique;">
+                                Closed Opportunities:
+                            </div>
                             <template for:each={acc.Opportunities} for:item="opp">
                                 <div key={opp.AccountId}>
                                     <p onclick={viewRecord} data-id={opp.Id}>Name: <b>{opp.Name}</b></p>
