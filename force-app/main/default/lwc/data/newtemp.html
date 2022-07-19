@@ -1,21 +1,89 @@
 <template>
     <lightning-card title="Closed Opportunities">
-        <template if:true={recs}>
-            <template for:each={recs} for:item="opportunity">
-                <div style="padding-left:20px;" key={opportunity.Id}>
-                    <div onclick={viewRecord} data-id={opportunity.Id}>Name: <b><i>{opportunity.Name}</i></b> (click)</div>
-                    <p>Created Date: <lightning-formatted-date-time value={opportunity.CreatedDate}>
-                        </lightning-formatted-date-time>
-                    </p>
-                    <p>Close Date: <lightning-formatted-date-time value={opportunity.CloseDate}>
-                        </lightning-formatted-date-time>
-                    </p>
-                    <p>Amount: {opportunity.Amount}$</p>
-                    <c-modal item={opportunity.Id}></c-modal>
-                    <br>
-                </div>
-            </template>
+        <!-- <template if:true={recs}>
+        <template for:each={recs} for:item="opportunity">
+            <div style="padding-left:20px;" key={opportunity.Id}>
+                <div onclick={viewRecord} data-id={opportunity.Id}>Name: <b><i>{opportunity.Name}</i></b> (click)</div>
+                <p>Created Date: <lightning-formatted-date-time value={opportunity.CreatedDate}>
+                    </lightning-formatted-date-time>
+                </p>
+                <p>Close Date: <lightning-formatted-date-time value={opportunity.CloseDate}>
+                    </lightning-formatted-date-time>
+                </p>
+                <p>Amount: {opportunity.Amount}$</p>
+                <c-modal item={opportunity.Id}></c-modal>
+                <br>
+            </div>
         </template>
-        
+    </template> -->
+        <lightning-accordion allow-multiple-sections-open>
+            <template if:true={recs}>
+                <template for:each={recs} for:item="opportunity">
+                    <lightning-accordion-section key={opportunity.Id} label={opportunity.Account.Name}>
+                        <lightning-card title="Closed Opportunities">
+                            <table
+                                class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                                <thead>
+                                    <tr class="slds-line-height_reset slds-text-title_caps">
+                                        <th class="slds-is-resizable" scope="col">
+                                            <div class="slds-truncate">
+                                                Opportunity Name
+                                            </div>
+                                        </th>
+                                        <th class="slds-is-resizable" scope="col">
+                                            <div class="slds-truncate">
+                                                Created Date
+                                            </div>
+                                        </th>
+                                        <th class="slds-is-resizable" scope="col">
+                                            <div class="slds-truncate">
+                                                Close Date
+                                            </div>
+                                        </th>
+                                        <th class="slds-is-resizable" scope="col">
+                                            <div class="slds-truncate">
+                                                Amount
+                                            </div>
+                                        </th>
+                                        <th class="slds-is-resizable" scope="col">
+                                            <div class="slds-truncate">
+                                                Products
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            <div onclick={viewRecord} data-id={opportunity.Id} class="slds-truncate">
+                                                <b>{opportunity.Name}</b> (click)
+                                            </div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate">
+                                                <lightning-formatted-date-time value={opportunity.CreatedDate}>
+                                                </lightning-formatted-date-time>
+                                            </div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate">
+                                                <lightning-formatted-date-time value={opportunity.CloseDate}>
+                                                </lightning-formatted-date-time>
+                                            </div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate">{opportunity.Amount}$</div>
+                                        </th>
+                                        <th scope="row">
+                                            <c-modal item={opportunity.Id}></c-modal>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </lightning-card>
+                    </lightning-accordion-section>
+                </template>
+            </template>
+        </lightning-accordion>
     </lightning-card>
 </template>

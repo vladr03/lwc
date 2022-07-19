@@ -7,7 +7,7 @@ public with sharing class getDataForTheThirdStep {
 
     @AuraEnabled(cacheable = true)
     public static List<Account> getAccount(String accId) {
-        return [SELECT Id, Account.Name, (SELECT Opportunity.Id, Opportunity.Name, Opportunity.CreatedDate, Opportunity.CloseDate, Opportunity.StageName, Opportunity.Amount FROM Account.Opportunities WHERE Opportunity.StageName = 'Closed Won') FROM Account WHERE Id = :accId];
+        return [SELECT Id, Account.Name, (SELECT Opportunity.Id, Opportunity.Name, Opportunity.Account.Name, Opportunity.CreatedDate, Opportunity.CloseDate, Opportunity.StageName, Opportunity.Amount FROM Account.Opportunities WHERE Opportunity.StageName = 'Closed Won') FROM Account WHERE Id = :accId];
     }
 
     @AuraEnabled(cacheable = true)
